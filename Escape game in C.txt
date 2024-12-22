@@ -1,0 +1,484 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void entrytext(void) {
+    // Black=30, red=31, green=32, yellow=33, blue=34, magenta=35, cyan=36, white=37, reset=0.
+    printf("\033[1;32mW\033[0m");
+    printf("\033[1;31me\033[0m");
+    printf("\033[1;33ml\033[0m");
+    printf("\033[1;34mc\033[0m");
+    printf("\033[1;36mo\033[0m");
+    printf("\033[1;35mm\033[0m");
+    printf("\033[1;33me\033[0m ");
+    printf("\033[1;31mt\033[0m");
+    printf("\033[1;36mo\033[0m ");
+    printf("\033[1;32mE\033[0m");
+    printf("\033[1;34mS\033[0m");
+    printf("\033[1;35mC\033[0m");
+    printf("\033[1;32mA\033[0m");
+    printf("\033[1;33mP\033[0m");
+    printf("\033[1;31mE\033[0m\n");
+    printf("Enter \033[1;32ms\033[0m to start or \033[1;31ml\033[0m to leave\n");
+}
+
+void instructions(void) {
+    printf("Use \033[1;36mu\033[0m for up.\n");
+    printf("\033[1;36md\033[0m for down.\n");
+    printf("\033[1;36ml\033[0m for left.\n");
+    printf("\033[1;36mr\033[0m for right.\n");
+    printf("Player cannot move diagonnaly. You can only occupy a cell once.\nPlayer can move by only one cell at a time.\nVision is limited.\n");
+    printf("Player has to make the \033[1;32mright\033[0m decisions during the game to escape from the kidnapper.\n");
+    printf("Player has only \033[1;31m3\033[0m chances to revive.\n");
+    printf("\033[1;35mExploring\033[0m can grant you \033[1;32mHealing potions\033[0m\n ");
+    printf("Once a player steps on a \033[1;31mBOMB\033[0m it's \033[1;31mGAME OVER\033[0m\n");
+    printf("Along with \033[1;33mcoins\033[0m that you can use to buy \033[1;31mweapons\033[0m later in the game.\n");
+    printf("Go with the flow and escape the \033[1;31mKIDNAPPER\033[0m.\n");
+}
+void lifem1(int *p){
+*p= *p-1;
+if(*p == 0){
+    printf("\033[1;31mYOU LOST\033[0m");
+    exit(0);
+}
+
+}
+void lifep1(int *p){
+*p = *p+1;
+}
+
+
+
+
+int main() {
+    int l=3;
+    int *p=&l;
+    
+
+    entrytext();
+    char ch;
+    scanf(" %c", &ch); 
+    if(ch == 'l') {
+        exit(0);
+    } 
+    system("cls");
+    printf("Enter \033[1;32mi\033[0m for instructions or \033[1;31mx\033[0m to skip instructions:\n");
+        scanf(" %c",&ch);
+        system("cls"); 
+        if(ch == 'i') {
+            instructions();
+            printf("Enter  \033[1;32mf\033[0m if you are done reading and start the game. ");
+            scanf(" %c",&ch);
+            if(ch=='f'){
+                system("cls");
+            }
+        }else if(ch == 'x') {
+            printf("Skipping instructions...\n");
+            printf("Press to \033[1;32mb\033[0m to begin: ");
+    scanf(" %c",&ch);
+    if(ch=='b'){
+        system("cls");
+    }
+    }
+    char c;
+printf("You wake up and see yourself tied up.\nUse the \033[1;32mpocket knife\033[0m in your jacket to free yourself.\n");
+printf("Press \033[1;32me\033[0m to access \033[1;32mpocket knife\033[0m.\n");
+scanf(" %c",&c);
+if(c=='e'){
+printf("You can \033[1;33mmove\033[0m now!!\n");
+printf("Enter \033[1;32mc\033[0m to continue: ");
+scanf(" %c",&c);
+if(c=='c'){
+    system("cls");}
+}else{
+    do{
+    printf("invalid. \033[1;31mYOU LOST A LIFE.\033[0m\n");
+    lifem1(p);
+    printf("Try again");
+
+       printf("Press \033[1;32me\033[0m to acess \033[1;32mpocket knife\033[0m.\n");
+     scanf(" %c",&ch);
+     if(ch=='e'){
+     printf("You can \033[1;33mmove\033[0m now!!\n");
+     printf("Enter space to continue: ");
+     scanf(" %c",&c);
+     if(c==' '){
+     system("cls");} 
+
+     }}while(ch != 'e'&& *p>0);
+}
+printf("The \033[1;31mKIDNAPPER\033[0m has implanted \033[1;31mBOMBS\033[0m in the room.\nUse the \033[1;32mhints\033[0m to escape!\n");
+printf("Enter \033[1;32mh\033[0m for hint: ");
+scanf(" %c",&ch);
+if(ch=='h'){
+    system("cls");
+printf("This is a game of colours. Choose your steps wisely.\n\033[1;33mYou\033[0m are at the bottom left cell of the room.\n\033[1;32mExit\033[0m is at the top right cell.\n\n");
+for(int i=1; i<=5; i++){
+    for(int j=1; j<=5; j++){
+        if(i==1 && j==1){
+            printf("\033[1;31m*\033[0m  ");
+        }else if(i==1 && j==4){
+            printf("\033[1;36m!\033[0m  ");
+        }else if(i==1 && j==5){
+            printf("\033[1;32m[]\033[0m  ");
+        }else if(i==4 && j==1){
+          printf("\033[1;31m*\033[0m  ");  
+        }else if(i==2 && j==3){
+            printf("\033[1;31m*\033[0m  ");
+        }else if(i==2 && j==5){
+            printf("\033[1;36m!\033[0m  ");
+        }else if(i==3 && j==2){
+            printf("\033[1;31m*\033[0m  ");
+        }else if(i==3 && j==4){
+            printf("\033[1;31m*\033[0m  ");
+        }else if(i==4 && j==2){
+           printf("\033[1;31m*\033[0m  "); 
+        }else if(i==4 && j==3){
+            printf("\033[1;31m*\033[0m  ");
+        }else if(i==5 && j==1){
+            printf("\033[1;33mX\033[0m  ");
+        }else if(i==5 && j==5){
+            printf("\033[1;31m*\033[0m  ");
+        }else{
+            printf("o  ");
+        }
+    }
+    printf("\n");
+}
+printf("\n");
+printf("enter choice: ");
+scanf(" %c",&c);
+if(c=='r'){
+    system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5; i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==5 && j==2){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && j==1){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='r'){
+        system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5; i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==5 && j==3){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && (j==1||j==2)){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='r'){
+         system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5; i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==5 && j==4){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && (j==1||j==2|| j==3)){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='u'){
+        system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5;i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==4 && j==4){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && (j==1||j==2|| j==3|| j==4)){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='r'){
+        system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5;i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==4 && j==5){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && (j==1||j==2|| j==3|| j==4)){
+                printf("\033[1;35m0\033[0m  ");
+            }else if(i==4 && j==4){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='u'){
+        system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5;i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==3 && j==5){
+               printf("\033[1;33mX\033[0m  "); 
+            }else if(i==5 && (j==1||j==2|| j==3|| j==4)){
+                printf("\033[1;35m0\033[0m  ");
+            }else if(i==4 && (j==4|| j==5)){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("Enter choice: ");
+    scanf(" %c",&ch);
+    if(ch=='u'){
+        system("cls");
+    printf("Smart choice!\nMake your next move:\n");
+    for(int i=1; i<=5;i++){
+        for(int j=1; j<=5; j++){
+            if(i==1&& j==1){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==2 && j==3){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==2){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==3 && j==4){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==4 && (j==1|| j==3 || j==2)){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==5 && j==5){
+                printf("\033[1;31m*\033[0m  ");
+            }else if(i==1 && j==4){
+                 printf("\033[1;36m!\033[0m  ");
+            }else if(i==2 && j==5){
+                 printf("\033[1;33mX\033[0m  ");
+            }else if(i==3 && j==5){
+               printf("\033[1;35m0\033[0m  "); 
+            }else if(i==5 && (j==1||j==2|| j==3|| j==4)){
+                printf("\033[1;35m0\033[0m  ");
+            }else if(i==4 && (j==4|| j==5)){
+                printf("\033[1;35m0\033[0m  ");
+            }else{
+                printf("o  ");
+            }
+
+        }
+        printf("\n");
+    }
+    printf("\n");
+    printf("You've found a \033[1;33mTREASURE CHEST\033[0m!\nEnter \033[1;32mo\033[0m to open it:\n ");
+    scanf(" %c",&ch);
+    if(ch=='o'){
+        printf("A \033[1;33mx10 COINS\033[0m and a \033[1;32mHEALING POTION\033[0m has been added to the inventory!\n");
+    }
+    printf("Enter u to move up:\n");
+    scanf(" %c",&ch);
+    if(ch == 'u'){
+        system("cls");
+        printf("Player has \033[1;33mS\033[0m\033[1;32mU\033[0m\033[1;35mC\033[0m\033[1;36mC\033[0m\033[1;31mE\033[0m\033[1;33mS\033[0m\033[1;35mS\033[0m\033[1;32mF\033[0m\033[1;36mU\033[0m\033[1;31mL\033[0m\033[1;37mL\033[0m\033[1;32mY\033[0m left the room!\n");
+        printf("Enter c to continue: \n");
+        scanf(" %c",&ch);
+        if(ch=='c'){
+            system("cls");
+            printf("Use your \033[1;33mCOINS\033[0m to buy a \033[1;31mGUN\033[0m from the shop.\n");
+        printf("Enter p to purchase the gun: \n");
+        scanf(" %c",&ch);
+        if(ch=='p'){
+            printf("\033[1;31mGUN has been purchased.\n");
+            printf("-10\033[1;33mCOINS\033[0m \n");
+        }else{
+        printf("error");
+        exit(0);
+        }
+        system("cls");
+        printf("DO you wish to \033[1;31KILL\033[0m the Kiddnapper?\n");
+        printf("Enter \033[1;31mk\033[0m to \033[1;31mKILL\033[0m or \033[1;32ml\033[0m to \033[1;32mleave\033[0m\n");
+        scanf(" %c",&ch);
+        if(ch=='k'){
+            system("cls");
+            printf("No one believed you.\nYou were charged for \033[1;31mMURDER\033[0m.\nYou \033[1;31mESCAPED\033[0m but at what cost?\n\n\033[1;31mTHE END.\033[0m\n ");
+        }
+        if(ch=='l'){
+            system("cls");
+            printf("You \033[1;32mE\033[0m\033[1;34mS\033[0m\033[1;35mC\033[0m\033[1;32mA\033[0m\033[1;33mP\033[0m\033[1;31mE\033[0m\033[1;36mD\033[0m \nYour kidnapper was caught by the \033[1;36mPOLICE\033[0m\nYou are \033[1;32mSAFE\033[0m now.\n\n\033[1;33mTHE END\033[0m\n");
+        }
+        
+    }
+    }
+    }else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+    }else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+    }else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+    }else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+    }else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+
+}else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+} else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}   
+}else{
+    printf("You \033[1;33mblew\033[0m up\n");
+    printf("\033[1;31mGAME OVER\033[0m\n");
+    exit(0);
+
+}
+}
